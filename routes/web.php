@@ -11,7 +11,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [TaskController::class, 'index'])
     ->middleware(['auth'])->name('dashboard');
 
-Route::resource('tarefa', TaskController::class)->middleware('auth');
+Route::resource('task', TaskController::class)->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

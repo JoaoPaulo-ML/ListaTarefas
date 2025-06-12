@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Tarefa;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $todasAsTarefas = Auth::user()->tarefas()->get();
+        $todasAsTarefas = Auth::user()->tasks()->get();
 
         $tarefasAgrupadas = $todasAsTarefas->groupBy('status');
 
@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tarefa.create'); 
+        return view('task.create'); 
     }
 
     /**
@@ -42,7 +42,7 @@ class TaskController extends Controller
             'tempoLimite' => 'nullable|date',
         ]);
 
-        $tarefa = new Tarefa();
+        $tarefa = new Task();
         $tarefa->titulo = $validatedData['titulo'];
         $tarefa->descricao = $validatedData['descricao'];
         $tarefa->status = $validatedData['status'];
@@ -64,15 +64,15 @@ class TaskController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tarefa $tarefa)
+    public function edit(Task $tarefa)
     {
-        return view('tarefa.edit', compact('tarefa'));
+        return view('task.edit', compact('tarefa'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Tarefa $tarefa)
+    public function update(Request $request, Task $tarefa)
     {
         $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
@@ -89,7 +89,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarefa $tarefa)
+    public function destroy(Task $tarefa)
     {
         $tarefa->delete();
 
