@@ -1,3 +1,8 @@
+## Sistema para atividade da faculdade
+
+Um aplicativo de quadro Kanban para organizar tarefas, desenvolvido com Laravel.
+
+    
 ## ⚙️ Como executar o projeto localmente
 
 1. **Clone o repositório:**
