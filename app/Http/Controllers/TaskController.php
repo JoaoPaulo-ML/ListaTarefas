@@ -6,7 +6,7 @@ use App\Models\Tarefa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TarefaController extends Controller
+class TaskController extends Controller
 {
     /**
      * Display a listing of the resource.

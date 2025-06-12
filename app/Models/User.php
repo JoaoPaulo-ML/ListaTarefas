@@ -47,8 +47,18 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
-    public function tarefas(): HasMany
+    public function boards(): HasMany
+    {
+        return $this->hasMany(Board::class);
+    }
+
+    public function tasks(): HasMany
     {
         return $this->hasMany(Tarefa::class);
+    }
+
+    public function memberships(): BelongsToMany
+    {
+        return $this->belongsToMany(Board::class, 'board_user');
     }
 }

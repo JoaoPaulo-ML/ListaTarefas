@@ -2,16 +2,16 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TarefaController;
+use App\Http\Controllers\TaskController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [TarefaController::class, 'index'])
-    ->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [TaskController::class, 'index'])
+    ->middleware(['auth'])->name('dashboard');
 
-Route::resource('tarefa', TarefaController::class)->middleware('auth');
+Route::resource('tarefa', TaskController::class)->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
