@@ -16,10 +16,16 @@ class Task extends Model
         'status',
         'tempoLimite',
         'user_id', 
+        'board_id',
     ];
 
-    public function user()
+    public function user() 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function board(): BelongsTo
+    {
+        return $this->belongsTo(Board::class);
     }
 }

@@ -12,24 +12,27 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            
             $table->id();
 
             $table->string('titulo');
             $table->text('descricao')->nullable();
             $table->enum('status', ['pendente', 'em_andamento', 'concluida'])->default('pendente');
             $table->dateTime('tempoLimite')->nullable();
-
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('board_id')
+                  ->constrained('boards')
+                  ->onDelete('cascade');
 
             $table->timestamps();
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('task');
     }
 };

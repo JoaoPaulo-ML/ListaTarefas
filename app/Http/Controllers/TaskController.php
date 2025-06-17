@@ -17,7 +17,7 @@ class TaskController extends Controller
 
         $tarefasAgrupadas = $todasAsTarefas->groupBy('status');
 
-        return view('dashboard', [
+        return view('task.index', [
             'tarefasAgrupadas' => $tarefasAgrupadas
         ]);
     }
