@@ -3,37 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use App\Models\Board;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Board $board)
     {
-        $todasAsTarefas = Auth::user()->tasks()->get();
+        if ($board->user_id !== Auth::id()) {
+            abort(403);
+        }
 
-        $tarefasAgrupadas = $todasAsTarefas->groupBy('status');
+        $tarefasAgrupadas = $board->tasks()->get()->groupBy('status');
 
         return view('task.index', [
+            'board' => $board, 
             'tarefasAgrupadas' => $tarefasAgrupadas
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Board $board)
     {
-        return view('task.create'); 
+        return view('task.create', compact('board')); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, Board $board)
     {
         $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
@@ -42,36 +37,22 @@ class TaskController extends Controller
             'tempoLimite' => 'nullable|date',
         ]);
 
-        $tarefa = new Task();
-        $tarefa->titulo = $validatedData['titulo'];
-        $tarefa->descricao = $validatedData['descricao'];
-        $tarefa->status = $validatedData['status'];
-        $tarefa->tempoLimite = $validatedData['tempoLimite'];
-        $tarefa->user_id = Auth::id(); 
-        $tarefa->save();
+        $task = new Task($validatedData);
+        $task->user_id = Auth::id();
+        $task->board_id = $board->id;
+        $task->save();
 
-        return redirect()->route('dashboard')->with('success', 'Tarefa criada com sucesso!');
+        return redirect()->route('boards.tasks.index', $board)->with('success', 'Tarefa criada com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Task $task)
     {
-        //
+        if ($task->user_id !== Auth::id()) {
+            abort(403);
+        }
+        return view('task.edit', compact('task'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $tarefa)
-    {
-        return view('task.edit', compact('tarefa'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Task $tarefa)
     {
         $validatedData = $request->validate([
@@ -81,18 +62,15 @@ class TaskController extends Controller
             'tempoLimite' => 'nullable|date',
         ]);
 
-        $tarefa->update($validatedData);
-
-        return redirect()->route('dashboard')->with('success', 'Tarefa atualizada com sucesso!');
+        $task->update($request->all());
+        
+        return redirect()->route('boards.tasks.index', $task->board)->with('success', 'Tarefa atualizada!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Task $tarefa)
     {
-        $tarefa->delete();
-
-        return redirect()->route('dashboard')->with('success', 'Tarefa excluída com sucesso!');
+        $board = $task->board; 
+        $task->delete();
+        return redirect()->route('boards.tasks.index', $board)->with('success', 'Tarefa excluída!');
     }
 }

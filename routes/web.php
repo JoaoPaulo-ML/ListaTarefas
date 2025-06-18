@@ -12,9 +12,8 @@ Route::get('/', function () {
 Route::get('/dashboard', [BoardController::class, 'index'])
     ->middleware(['auth'])->name('dashboard');
 
-Route::resource('task', TaskController::class)->middleware('auth');
-
 Route::resource('boards', BoardController::class)->middleware(['auth']);
+Route::resource('boards.tasks', TaskController::class)->middleware('auth')->shallow();
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -23,7 +23,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 
                 @forelse ($boards as $board)
-                    <a href="#" class="block">
+                    <a href="{{ route('boards.tasks.index', $board) }}" class="block">
                         <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:bg-gray-700 transition-transform transform hover:-translate-y-1">
                             <h3 class="font-bold text-lg text-white">{{ $board->name }}</h3>
 
