@@ -1,3 +1,4 @@
+
 <x-app-layout>
 
     <div class="mt-8">
@@ -94,4 +95,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

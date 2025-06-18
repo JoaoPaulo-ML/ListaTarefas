@@ -3,15 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\BoardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [TaskController::class, 'index'])
+Route::get('/dashboard', [BoardController::class, 'index'])
     ->middleware(['auth'])->name('dashboard');
 
 Route::resource('task', TaskController::class)->middleware('auth');
+
+Route::resource('boards', BoardController::class)->middleware(['auth']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
