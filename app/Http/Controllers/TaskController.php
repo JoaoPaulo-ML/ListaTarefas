@@ -11,15 +11,18 @@ class TaskController extends Controller
 {
     public function index(Board $board)
     {
-        if ($board->user_id !== Auth::id()) {
+        if ($board->user_id !== Auth::id() && !$board->members->contains(Auth::user())) {
             abort(403);
         }
 
         $tarefasAgrupadas = $board->tasks()->get()->groupBy('status');
 
+        $members = $board->members;
+
         return view('task.index', [
-            'board' => $board, 
-            'tarefasAgrupadas' => $tarefasAgrupadas
+            'board' => $board,
+            'tarefasAgrupadas' => $tarefasAgrupadas,
+            'members' => $members,
         ]);
     }
 
