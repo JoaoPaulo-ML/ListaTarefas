@@ -10,7 +10,12 @@ class BoardController extends Controller
 {
     public function index()
     {
-        $boards = Auth::user()->boards()->get();
+   
+        $ownedBoards = Auth::user()->boards;
+
+        $memberBoards = Auth::user()->memberships;
+
+        $boards = $ownedBoards->merge($memberBoards)->unique('id');
 
         return view('dashboard', compact('boards'));
     }

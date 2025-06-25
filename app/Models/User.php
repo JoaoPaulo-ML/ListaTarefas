@@ -57,7 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Task::class);
     }
 
-    public function memberships(): BelongsToMany
+    public function memberships() 
     {
         return $this->belongsToMany(Board::class, 'board_user');
     }
