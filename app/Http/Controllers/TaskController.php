@@ -50,14 +50,20 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        if ($task->user_id !== Auth::id()) {
+
+        if (Auth::id() !== $task->user_id && !$task->board->members->contains(Auth::user())) {
             abort(403);
         }
         return view('task.edit', compact('task'));
     }
 
-    public function update(Request $request, Task $tarefa)
+    public function update(Request $request, Task $task)
     {
+
+        if (Auth::id() !== $task->user_id && !$task->board->members->contains(Auth::user())) {
+            abort(403);
+        }
+
         $validatedData = $request->validate([
             'titulo' => 'required|string|max:255',
             'descricao' => 'nullable|string',
@@ -65,9 +71,9 @@ class TaskController extends Controller
             'tempoLimite' => 'nullable|date',
         ]);
 
-        $task->update($request->all());
-        
-        return redirect()->route('boards.tasks.index', $task->board)->with('success', 'Tarefa atualizada!');
+        $task->update($validatedData);
+     
+        return redirect()->route('boards.tasks.index', $task->board)->with('success', 'Tarefa atualizada com sucesso!');
     }
 
     public function destroy(Task $tarefa)
@@ -75,5 +81,21 @@ class TaskController extends Controller
         $board = $task->board; 
         $task->delete();
         return redirect()->route('boards.tasks.index', $board)->with('success', 'Tarefa excluída!');
+    }
+
+    public function updateStatus(Request $request, Task $task)
+    {
+ 
+        if (Auth::id() !== $task->user_id && !$task->board->members->contains(Auth::user())) {
+            abort(403);
+        }
+
+        $request->validate([
+            'status' => 'required|in:pendente,em_andamento,concluida',
+        ]);
+
+        $task->update(['status' => $request->status]);
+
+        return response()->json(['success' => true]);
     }
 }

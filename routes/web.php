@@ -19,6 +19,8 @@ Route::resource('boards.tasks', TaskController::class)->middleware('auth')->shal
 Route::get('/boards/{board}/members/create', [BoardMemberController::class, 'create'])->name('boards.members.create')->middleware('auth');
 Route::post('/boards/{board}/members', [BoardMemberController::class, 'store'])->name('boards.members.store')->middleware('auth');
 
+Route::patch('/tasks/{task}/status', [App\Http\Controllers\TaskController::class, 'updateStatus'])->name('tasks.updateStatus')->middleware('auth');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

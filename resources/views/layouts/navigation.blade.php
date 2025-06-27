@@ -12,10 +12,6 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                        <p class="color: white">Painel</p> 
                     </x-nav-link>
-                
-                    <x-nav-link href="#" :active="false">
-                        Colaborador
-                    </x-nav-link>
                 </div>
             </div>
 
@@ -31,10 +27,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <div class="px-4 py-3">
-                            <p class="text-sm text-gray-900">{{ Auth::user()->name }}</p>
-                            <p class="text-sm font-medium text-gray-500 truncate">{{ Auth::user()->email }}</p>
+                        <div class="px-4 py-3 border-b border-gray-700">
+                            <p class="text-sm text-white">{{ Auth::user()->name }}</p>
+                            <p class="text-sm font-medium text-gray-400 truncate">{{ Auth::user()->email }}</p>
                         </div>
+
                          <hr>
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
