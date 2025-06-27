@@ -1,8 +1,32 @@
-## Sistema para atividade da faculdade
+## Avaliação faculdade
 
-Um aplicativo de quadro Kanban para organizar tarefas, desenvolvido com Laravel.
+# Kanban Task Manager - Gerenciador de Tarefas
 
-    
+Um aplicativo web completo para gerenciamento de projetos e tarefas, inspirado em plataformas como Trello e Asana. Construído com o framework Laravel, este projeto foi desenvolvido para demonstrar a criação de uma aplicação full-stack com autenticação, relacionamentos com o banco de dados e uma interface de usuário interativa.
+
+## ✨ Funcionalidades Principais
+
+-   **Autenticação de Usuários:** Sistema completo de registro e login utilizando o Laravel Breeze.
+-   **Gerenciamento de Boards (Quadros):**
+    -   Criação de múltiplos quadros para diferentes projetos.
+    -   Cada usuário pode ser dono de seus próprios quadros.
+-   **Sistema de Colaboração:**
+    -   O dono de um board pode convidar outros usuários cadastrados para colaborar.
+    -   Visualização de todos os boards dos quais você é dono ou membro em um único dashboard.
+-   **Gerenciamento de Tarefas:**
+    -   Criação de tarefas dentro de cada board.
+    -   Visualização de detalhes das tarefas em um modal interativo.
+    -   Organização das tarefas em três colunas: **Pendente**, **Em Andamento** e **Concluída**.
+-   **Drag-and-Drop (Arrastar e Soltar):**
+    -   Mova tarefas de forma fluida entre as colunas para atualizar seu status.
+    -   A mudança é salva automaticamente no banco de dados através de uma requisição assíncrona.
+
+## 🛠️ Tecnologias Utilizadas
+
+-   **Backend:** PHP, Laravel
+-   **Frontend:** Blade, Tailwind CSS, Alpine.js
+-   **Banco de Dados:** MySQL
+  
 ## ⚙️ Como executar o projeto localmente
 
 1. **Clone o repositório:**
@@ -29,24 +53,35 @@ DB_USERNAME=usuario_do_banco
 DB_PASSWORD=senha_do_banco
 ```
 
-4. **Dar o comando migrate para configurar o banco**
+4. **Configure o SMTP para enviar as comfirmações pelo email**
+```bash
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=Seu email
+MAIL_PASSWORD=Senha
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=""
+MAIL_FROM_NAME="${APP_NAME}"
+```
+5. **Dar o comando migrate para configurar o banco**
 ```bash
 php artisan migrate
 ```
-5. **Gerar key do app**
+6. **Gerar key do app**
 ```bash
 php artisan key:generate
 ```
-6. **Criar o link publico do storage**
+7. **Criar o link publico do storage**
 ```bash
 php artisan storage:link
 ```
-7. **rodar o npm**
+8. **rodar o npm**
 ```bash
 npm install
-npm run build
+npm run dev
 ```
-8. **rodar o servidor**
+9. **rodar o servidor**
 ```bash
 php artisan serve
 ```
