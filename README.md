@@ -1,8 +1,8 @@
 ## Avaliação faculdade
 
-# Kanban Task Manager - Gerenciador de Tarefas
+# Kanban - Gerenciador de Tarefas
 
-Um aplicativo web completo para gerenciamento de projetos e tarefas, inspirado em plataformas como Trello e Asana. Construído com o framework Laravel, este projeto foi desenvolvido para demonstrar a criação de uma aplicação full-stack com autenticação, relacionamentos com o banco de dados e uma interface de usuário interativa.
+Um aplicativo web completo para gerenciamento de projetos e tarefas, inspirado em plataformas como Trello.
 
 ## ✨ Funcionalidades Principais
 
