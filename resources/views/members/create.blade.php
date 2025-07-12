@@ -19,12 +19,13 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-6">
-                            <a href="{{ route('boards.tasks.index', $board) }}" class="text-sm text-gray-400 hover:text-white underline mr-4">
+                            <x-cancelar href="{{ route('boards.tasks.index', $board) }}">
                                 Cancelar
-                            </a>
-                            <x-primary-button>
+                            </x-cancelar>
+
+                            <x-padraobutton type="submit">
                                 Adicionar Colaborador
-                            </x-primary-button>
+                            </x-padraobutton>
                         </div>
                     </form>
 

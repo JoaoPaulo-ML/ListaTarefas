@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        {{-- CORRIGIDO: Usa $task e tem a cor do texto ajustada --}}
+       
         <h2 class="font-semibold text-xl text-gray-200 leading-tight">
             {{ __('Editar Tarefa: ') }} <span class="italic text-blue-400">{{ $task->titulo }}</span>
         </h2>
@@ -8,16 +8,14 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            {{-- Estilo do card ajustado para o tema escuro --}}
+           
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 md:p-8 border-b border-gray-700">
 
-                    {{-- Formulário corrigido --}}
                     <form method="POST" action="{{ route('tasks.update', $task) }}">
                         @csrf
                         @method('PUT') {{-- O método para update é PUT ou PATCH --}}
 
-                        {{-- Título --}}
                         <div class="mb-6">
                             <label for="titulo" class="block text-sm font-medium text-gray-300 mb-1">Título</label>
                             <div class="relative rounded-md shadow-sm">
@@ -53,15 +51,16 @@
                             </div>
                         </div>
 
-                        {{-- Botões --}}
+                      
                         <div class="flex items-center justify-end mt-8 border-t border-gray-700 pt-6 space-x-4">
-                            {{-- CORRIGIDO: O link de cancelar volta para a página de tarefas do board correto --}}
-                            <a href="{{ route('boards.tasks.index', $task->board) }}" class="text-sm font-medium text-gray-400 hover:text-white">
+                            
+                            <x-cancelar href="{{ route('boards.tasks.index', $task->board) }}">
                                 Cancelar
-                            </a>
-                            <button type="submit" class="inline-flex items-center px-6 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            </x-cancelar>
+
+                            <x-padraobutton type="submit">
                                 Salvar Alterações
-                            </button>
+                            </x-padraobutton>
                         </div>
                     </form>
 

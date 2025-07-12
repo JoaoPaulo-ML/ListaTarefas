@@ -26,9 +26,9 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-6">
-                            <a href="{{ route('dashboard') }}" class="text-sm text-gray-400 hover:text-white underline mr-4">
+                            <x-cancelar href="{{ route('dashboard') }}">
                                 Cancelar
-                            </a>
+                            </x-cancelar>
 
                             <x-primary-button>
                                 Salvar Board

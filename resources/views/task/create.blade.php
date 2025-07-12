@@ -61,13 +61,14 @@
                         </div>
 
                         <div class="flex items-center justify-end mt-8 border-t border-gray-700 pt-6 space-x-4">
-                            <a href="{{ route('boards.tasks.index', $board) }}" class="text-sm font-medium text-gray-400 hover:text-white">
+                            
+                            <x-cancelar href="{{ route('boards.tasks.index', $board) }}">
                                 Cancelar
-                            </a>
-                            <button type="submit"
-                                    class="inline-flex items-center px-6 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-sm text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            </x-cancelar>
+
+                            <x-padraobutton type="submit">
                                 Salvar Tarefa
-                            </button>
+                            </x-padraobutton>
                         </div>
                     </form>
                 </div>
