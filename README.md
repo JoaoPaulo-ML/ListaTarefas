@@ -1,4 +1,4 @@
-## Avaliação faculdade
+## Projeto faculdade
 
 # Kanban - Gerenciador de Tarefas
 
@@ -24,7 +24,7 @@ Um aplicativo web completo para gerenciamento de projetos e tarefas, inspirado e
 ## 🛠️ Tecnologias Utilizadas
 
 -   **Backend:** PHP, Laravel
--   **Frontend:** Blade, Tailwind CSS, Alpine.js
+-   **Frontend:** Blade, Tailwind CSS
 -   **Banco de Dados:** MySQL
   
 ## ⚙️ Como executar o projeto localmente
@@ -53,7 +53,7 @@ DB_USERNAME=usuario_do_banco
 DB_PASSWORD=senha_do_banco
 ```
 
-4. **Configure o SMTP para enviar as comfirmações pelo email**
+4. **Configure o SMTP para enviar as confirmações pelo email**
 ```bash
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
